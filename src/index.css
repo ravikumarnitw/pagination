@@ -128,7 +128,6 @@ Pagination
 */
 .section-title {
   text-align: center;
-  margin: 4rem 0 6rem 0;
 }
 .underline {
   width: 8rem;
@@ -139,7 +138,7 @@ Pagination
 .followers {
   width: 90vw;
   max-width: var(--max-width);
-  margin: 5rem auto;
+  margin: 2rem auto;
 }
 .container {
   display: grid;
@@ -215,6 +214,13 @@ Pagination
   font-size: 1rem;
   cursor: pointer;
 }
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 20px;
+}    
 
 @media screen and (min-width: 775px) {
   .btn-container {

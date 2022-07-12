@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { useFetch } from './useFetch'
-import Follower from './Follower'
+import { useFetch } from './utils/useFetch';
+import Follower from './components/Follower'
+import Search from './components/Search';
+import './App.css';
 function App() {
-  const { loading, data } = useFetch()
-  const [page, setPage] = useState(0)
-  const [followers, setFollowers] = useState([])
+  const [page, setPage] = useState(0);
+  const [followers, setFollowers] = useState([]);
+  const [url, setURL] = useState('fabpot'); //initally setting highest follower's user
+  const { loading, data } = useFetch(url);
 
+  const updateURL = (_url) =>{
+    setURL(_url);
+  }
   useEffect(() => {
-    if (loading) return
+    if (loading) return;
     setFollowers(data[page])
-  }, [loading, page])
+  }, [loading, page, data])
 
   const nextPage = () => {
     setPage((oldPage) => {
@@ -36,16 +42,21 @@ function App() {
 
   return (
     <main>
+      <div className='header-container'>
+      <div className = 'search-container'>
+      <Search updateURL = {updateURL}/>
+      </div>
       <div className='section-title'>
-        <h1>{loading ? 'loading...' : 'pagination'}</h1>
+        <h4>{loading ? 'loading...' : `follows @${url}`}</h4>
         <div className='underline'></div>
       </div>
+      </div>
       <section className='followers'>
-        <div className='container'>
+        {followers && <div className='container'>
           {followers.map((follower) => {
             return <Follower key={follower.id} {...follower} />
           })}
-        </div>
+        </div>}
         {!loading && (
           <div className='btn-container'>
             <button className='prev-btn' onClick={prevPage}>

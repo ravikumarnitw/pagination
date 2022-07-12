@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {FC} from 'react'
+import {GitHubUser} from '../utils/models';
 
-const Follower = ({ avatar_url, html_url, login }) => {
+const Follower: FC<GitHubUser> = ({ avatar_url, html_url, login }) => {
   return (
     <article className='card'>
       <img src={avatar_url} alt={login} />
